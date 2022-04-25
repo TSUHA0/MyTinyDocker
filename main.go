@@ -7,24 +7,23 @@ import (
 	"syscall"
 )
 
-func main(){
-    cmd := exec.Command("sh")
-    cmd.SysProcAttr = &syscall.SysProcAttr{
-		Cloneflags: syscall.CLONE_NEWUTS | 
-			syscall.CLONE_NEWNS|
-			syscall.CLONE_NEWPID|
-			syscall.CLONE_NEWNET|
-			syscall.CLONE_NEWUSER|
+func main() {
+	cmd := exec.Command("sh")
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Cloneflags: syscall.CLONE_NEWUTS |
+			syscall.CLONE_NEWNS |
+			syscall.CLONE_NEWPID |
+			syscall.CLONE_NEWNET |
+			syscall.CLONE_NEWUSER |
 			syscall.CLONE_NEWUTS,
-    }
-    
-    cmd.Stdin = os.Stdin
-    cmd.Stdout = os.Stdout
-    cmd.Stderr = os.Stderr
+	}
 
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 
-    if err := cmd.Run(); err!=nil{
-        log.Fatal(err)
-    }
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
 
 }
